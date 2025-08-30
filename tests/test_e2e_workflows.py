@@ -278,7 +278,7 @@ def test_normal_workflow(session, email, password, scenario):
     retry_delay = 5
     for attempt in range(max_retries + 1):
         case_detail = wf.get_case_detail(session, session_id, case_id)
-        print(f"Attempt {attempt + 1}: Case Detail for Approved Status: {case_detail}") # Added logging
+        print(f"Attempt {attempt + 1}")
         loan_status_approved_found = any(item.get("field_name") == "thinker.loanStatus" and item.get("value") == "APPROVED" for item in case_detail["customer_data"])
         remaining_verifying_field_list_empty = case_detail.get("remaining_verifying_field_list") == []
         

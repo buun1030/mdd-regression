@@ -15,6 +15,11 @@ This project contains automated regression tests for a sample API, written in Py
     pip install -r requirements.txt
     ```
 
+**Note:** If you need to recreate the virtual environment, you can remove the `venv` directory and follow the setup steps again:
+```bash
+rm -rf venv
+```
+
 ## Running Tests
 
 *   **Run all tests:**
