@@ -441,39 +441,39 @@ def test_gsb_lead_workflow(session, email, password, scenario):
     assert loan_status_found, "Expected 'thinker.loanStatus' with 'APPROVED' value not found in customer_data"
     print("Step 7: Loan Status is APPROVED verified.")
     
-    # print("Step 8: Customer Decision...")
-    # # Step 8: Answer Customer Decision
-    # wf.answer_questions(session, session_id, case_id, scenario["answers"]["customer_decision"])
-    # print("Step 8: Customer Decision answered.")
+    print("Step 8: Customer Decision...")
+    # Step 8: Answer Customer Decision
+    wf.answer_questions(session, session_id, case_id, scenario["answers"]["customer_decision"])
+    print("Step 8: Customer Decision answered.")
     
-    # print("Step 9: Completed Status...")
-    # # Step 9.1: Verify Loan Status is COMPLETED
-    # time.sleep(10)
-    # case_detail = wf.get_case_detail(session, session_id, case_id)
-    # customer_data_list = case_detail.get("customer_data", [])
-    # loan_status_found = False
-    # for item in customer_data_list:
-    #     if item.get("field_name") == "thinker.loanStatus" and item.get("value") == "COMPLETED":
-    #         loan_status_found = True
-    #         break
-    # assert loan_status_found, "Expected 'thinker.loanStatus' with 'COMPLETED' value not found in customer_data"
+    print("Step 9: Completed Status...")
+    # Step 9.1: Verify Loan Status is COMPLETED
+    time.sleep(10)
+    case_detail = wf.get_case_detail(session, session_id, case_id)
+    customer_data_list = case_detail.get("customer_data", [])
+    loan_status_found = False
+    for item in customer_data_list:
+        if item.get("field_name") == "thinker.loanStatus" and item.get("value") == "COMPLETED":
+            loan_status_found = True
+            break
+    assert loan_status_found, "Expected 'thinker.loanStatus' with 'COMPLETED' value not found in customer_data"
     
-    # # Step 9.2: Verify Case Status is COMPLETED
-    # assert case_detail.get("status") == "completed", "Expected status to be 'completed' but got a different value"
+    # Step 9.2: Verify Case Status is COMPLETED
+    assert case_detail.get("status") == "completed", "Expected status to be 'completed' but got a different value"
     
-    # # Step 9.3: Verify Verifying Field List is Not Empty
-    # verifying_field_list = case_detail.get("verifying_field_list", [])
-    # assert len(verifying_field_list) > 0, "verifying_field_list should not be empty"
+    # Step 9.3: Verify Verifying Field List is Not Empty
+    verifying_field_list = case_detail.get("verifying_field_list", [])
+    assert len(verifying_field_list) > 0, "verifying_field_list should not be empty"
     
-    # # Step 9.4: Verify Remaining Verifying Field List is Empty
-    # remaining_verifying_field_list = case_detail.get("remaining_verifying_field_list", [])
-    # assert remaining_verifying_field_list == [], "remaining_verifying_field_list should be empty"
-    # print("Step 9: Completed Status verified.")
+    # Step 9.4: Verify Remaining Verifying Field List is Empty
+    remaining_verifying_field_list = case_detail.get("remaining_verifying_field_list", [])
+    assert remaining_verifying_field_list == [], "remaining_verifying_field_list should be empty"
+    print("Step 9: Completed Status verified.")
     
-    # print("Step 10: Booking Detail...")
-    # # Step 10: Get Booking Detail
-    # time.sleep(5)
-    # booking_detail = wf.get_booking_detail(session, session_id, case_id)
-    # assert "latest_status" in booking_detail
-    # assert booking_detail["latest_status"] == "COMPLETED"
-    # print("Step 10: Booking Detail retrieved.")
+    print("Step 10: Booking Detail...")
+    # Step 10: Get Booking Detail
+    time.sleep(5)
+    booking_detail = wf.get_booking_detail(session, session_id, case_id)
+    assert "latest_status" in booking_detail
+    assert booking_detail["latest_status"] == "COMPLETED"
+    print("Step 10: Booking Detail retrieved.")
