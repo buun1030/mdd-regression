@@ -326,7 +326,7 @@ def test_normal_workflow(session, email, password, scenario):
     retry_delay = 5
     for attempt in range(max_retries + 1):
         case_detail = wf.get_case_detail(session, session_id, case_id)
-        print(f"Attempt {attempt + 1}: Case Detail for Completed Status: {case_detail}") # Added logging
+        print(f"Attempt {attempt + 1}")
         loan_status_completed_found = any(item.get("field_name") == "thinker.loanStatus" and item.get("value") == scenario["expected"]["final_status"] for item in case_detail["customer_data"])
         loan_result_a02_found = any(item.get("field_name") == "thinker.loanResult" and item.get("value") == scenario["expected"]["loan_result"] for item in case_detail["customer_data"])
         status_completed = case_detail.get("status") == "completed"
